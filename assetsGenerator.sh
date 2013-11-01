@@ -1,5 +1,6 @@
 #!/bin/sh
 #!/usr/bin/env bash
+
 DIR="$( cd "$( dirname "$0" )" && pwd )"
 
 TexturePacker --sheet "$DIR"/../bin/assets/1x/assets.png  --data "$DIR"/../bin/assets/1x/assets.xml  --scale 0.25 --format sparrow "$DIR"/assets.tps
