@@ -3,8 +3,17 @@
 
 DIR="$( cd "$( dirname "$0" )" && pwd )"
 
-TexturePacker --sheet "$DIR"/../bin/assets/1x/assets.png  --data "$DIR"/../bin/assets/1x/assets.xml  --scale 0.25 --format sparrow "$DIR"/assets.tps
-TexturePacker --sheet "$DIR"/../bin/assets/2x/assets.png  --data "$DIR"/../bin/assets/2x/assets.xml  --scale 0.5  --format sparrow "$DIR"/assets.tps
-TexturePacker --sheet "$DIR"/../bin/assets/4x/assets.png  --data "$DIR"/../bin/assets/4x/assets.xml  --scale 1.0  --format sparrow "$DIR"/assets.tps
+for i in 1 2 4
+do
+	TexturePacker --sheet "$DIR"/../bin/assets/"$i"x/assets.png  --data "$DIR"/../bin/assets/"$i"x/assets.xml  --scale $(echo "scale=2; $i/4" | bc) --format sparrow "$DIR"/assets.tps
+done
+
+for i in 1 2 4
+do
+	echo "pngquant image" "$i"x
+	pngquant -f --ext .png "$DIR"/../bin/assets/"$i"x/assets.png
+done
+
+echo "TexturePacker and pngquant tasks done."
 
 exit 0
